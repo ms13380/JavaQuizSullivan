@@ -12,14 +12,14 @@ var scorepage = document.getElementById("scorePage");
 var scoreinitials = document.getElementById("initials");
 var DisplayName = document.getElementById("hsinitials");
 var endgame = document.getElementById("end");
-var submitScore = document.getElementById("submit");
+var submitScore = document.getElementById("Submit");
 var dsphighschore = document.getElementById("hscore");
 var button1 = document.getElementById("a");
 var button2 = document.getElementById("b");
 var button3 = document.getElementById("c");
 var button4 = document.getElementById("d");
 
-var questions = [{
+var questionlist = [{
     question: "What does OOPs stand for?",
     choiceA: "OOPSIE DAISY I DELETED EVERYTHING",
     choiceB: "Out of programming",
@@ -70,24 +70,26 @@ var questions = [{
     correctAnswer: "d"},
     ];
 
-var finalQuestionIndex = questions.length;
+var finalQuestionIndex = questions.length-1;
 var currentQuestionIndex = 0;
-var timeLeft = 5;
+var timeLeft = 75;
 var timerInterval;
 var score = 0;
 var correct;
 
 function generateQuizQuestion(){
     gameend.style.display = "none";
-    if (currentQuestionIndex === finalQuestionIndex){
-        return showScore();
+    var currentQuestion = questionlist[currentQuestionIndex];
+    if (currentQuestionIndex == finalQuestionIndex || currentQuestion == null){
+        showScore();
     } 
-    var currentQuestion = questions[currentQuestionIndex];
+    else{
     questions.innerHTML = "<p>" + currentQuestion.question + "</p>";
     button1.innerHTML = currentQuestion.choiceA;
     button2.innerHTML = currentQuestion.choiceB;
     button3.innerHTML = currentQuestion.choiceC;
     button4.innerHTML = currentQuestion.choiceD;
+    }
 };
 
 startbutton.addEventListener("click",startQuiz);
@@ -112,12 +114,12 @@ function showScore(){
     gameend.style.display = "flex";
     clearInterval(timerInterval);
     scoreinitials.value = "";
-    finalscore.innerHTML = "You got " + score + " out of " + questions.length + " correct!";
+    finalscore.innerHTML = "You got " + score + " correct!";
 }
 
-submitScore.addEventListener("click", function highscore(){
-    
-    
+submitScore.addEventListener("click", highscoredisplay);
+
+function highscoredisplay(){    
     if(scoreinitials.value === "") {
         alert("Initials cannot be blank");
         return false;
@@ -140,7 +142,7 @@ submitScore.addEventListener("click", function highscore(){
 
     }
     
-});
+};
 
 function generateHighscores(){
     DisplayName.innerHTML = "";
@@ -182,9 +184,11 @@ function replayQuiz(){
 }
 
 function checkAnswer(answer){
-    correct = questions[currentQuestionIndex].correctAnswer;
-
-    if (answer === correct && currentQuestionIndex !== finalQuestionIndex){
+    correct = questionlist[currentQuestionIndex].correctAnswer;
+    if (currentQuestionIndex == finalQuestionIndex){
+        showScore
+    }
+    else if (answer === correct && currentQuestionIndex !== finalQuestionIndex){
         score++;
         alert("That Is Correct!");
         currentQuestionIndex++;

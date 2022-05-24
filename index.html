@@ -11,8 +11,8 @@
 
         <div id="openpage">
             <h2>This is a Quiz on Javascript!!</h2>
-        <button id="startbuttn" onclick="startbutton" > Start </button>
-        <button id="startPageHighscore" onclick="showHighscore()">High Scores!!</button>
+            <button id="startbuttn" onclick="startbutton" > Start </button>
+            <button id="startPageHighscore" onclick="showHighscore()">High Scores!!</button>
         </div>
 
         <div id="quiz">
@@ -28,11 +28,11 @@
 
             <div id="Score"></div>
             <input type="text" size = "40" placeholder="Your Initials:" name="intials" id="initials"/>
-            <button id="Submit">Submit</button>
+            <button id="Submit" onclick="showHighscore()">Submit</button>
         </div>
-        <div id=highscoreContainer>
+        <div id="highscoreContainer">
         <div id="scorePage">
-            <div id="highscore-header">
+            <div id="highscore">
                 <h3>User Initials</h3>
                 <h3>Score</h3>
             </div>
@@ -40,7 +40,7 @@
             <div id = "hscore"></div>
         </div>
         <div id="endGameBtns">
-            <button id="retake" onclick="replayQuiz()">Retake Quiz!</button>
+            <button id="gameend" onclick="replayQuiz()">Retake Quiz!</button>
         </div>
     </div>
     </div>
